@@ -1,0 +1,28 @@
+Commands:
+Fuzzykmeans
+./bin/mahout fkmeans -i /user/bigdata/reuters-vectors/tfidf-vectors/ -c /user/bigdata/reuters-fkmeans-centroids -o /user/bigdata/reuters-fkmeans-clusters -cd 1.0 -k 21 -m 2 -ow -x 10 -dm org.apache.mahout.common.distance.SquaredEuclideanDistanceMeasure
+
+clusterdump:
+./bin/mahout clusterdump -dt sequencefile -d /user/bigdata/reuters-vectors/dictionary.file-* -i /user/bigdata/reuters-fkmeans-clusters/clusters-3-final -o clusterfk.txt -b 15
+
+WIKI
+kmeans:
+./bin/mahout kmeans -i /user/wiki/wiki-vectors/tfidf-vectors/ -c /user/wiki/wiki-initial-clusters -o /user/wiki/wiki-kmeans-clusters -dm org.apache.mahout.common.distance.SquaredEuclideanDistanceMeasure -cd 1.0 -k 20 -x 20 -cl
+
+fkmeans:
+./bin/mahout fkmeans -i /user/wiki/wiki-vectors/tfidf-vectors/ -c /user/wiki/wiki-fkmeans-centroids -o /user/wiki/wiki-fkmeans-clusters -cd 1.0 -k 21 -m 2 -ow -x 10 -dm org.apache.mahout.common.distance.SquaredEuclideanDistanceMeasure
+
+./mahout fkmeans -i /user/wiki/wiki/wiki-vectors/tfidf-vectors/ -c /user/wiki/wiki/wiki-fkmeans-centroids -o /user/wiki/wiki/wiki-fkmeans-clusters -cd 1.0 -k 21 -m 2 -ow -x 10 -dm org.apache.mahout.common.distance.SquaredEuclideanDistanceMeasure
+
+canopy:
+bin/mahout canopy -i /user/wiki/wiki-vectors/tf-vectors -o /user/wiki/wiki-canopy -dm org.apache.mahout.common.distance.CosineDistanceMeasure -t1 1500 -t2 2000
+
+./mahout canopy -i /user/wiki/wiki/wiki-vectors/tfidf-vectors -o /user/wiki/wiki/wiki-canopy2-clusters -dm org.apache.mahout.common.distance.EuclideanDistanceMeasure -t1 1000 -t2 3000 -cl
+
+canopy cluster dump:
+./bin/mahout clusterdump -dt sequencefile -d /user/wikia/wiki-vectors/dictionary.file-* -i /user/wiki/wiki-canopy-cluster/clusters-0-final -o clusterCanopy.txt -b 15
+
+./mahout clusterdump -dt sequencefile -d /user/wiki/wiki/wiki-vectors/dictionary.file-0 -i /user/wiki/wiki/wiki-canopy3-clusters/clusters-0-final -o clusterCanopy3.txt -b 15 -n 10
+
+
+seqdump
